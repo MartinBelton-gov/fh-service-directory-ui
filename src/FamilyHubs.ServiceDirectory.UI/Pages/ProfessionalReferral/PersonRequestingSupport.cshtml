@@ -1,0 +1,38 @@
+﻿@page
+@model FamilyHubs.ServiceDirectory.Ui.Pages.ProfessionalReferral.PersonRequestingSupportModel
+@{
+}
+
+<main class="govuk-main-wrapper " id="main-content" role="main">
+
+    <form method="post">
+      <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+          <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+            <h1 class="govuk-fieldset__heading">
+              Are you?
+            </h1>
+          </legend>
+          <div class="govuk-radios govuk-radios--inline" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="none-professional" name="IsTypeOfPerson" type="radio" value="none-professional">
+              <label class="govuk-label govuk-radios__label" for="none-professional">
+                Family member or carrer
+              </label>
+            </div>
+            <div class="govuk-radios__item">
+              <input class="govuk-radios__input" id="professional" name="IsTypeOfPerson" type="radio" value="professional">
+              <label class="govuk-label govuk-radios__label" for="professional">
+                Professional
+              </label>
+            </div>
+          </div>
+
+        </fieldset>
+      </div>
+      <button type="submit" class="govuk-button">
+        Continue
+      </button>
+    </form>
+
+</main>

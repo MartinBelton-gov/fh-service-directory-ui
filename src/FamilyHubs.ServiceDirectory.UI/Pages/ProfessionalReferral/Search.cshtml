@@ -1,0 +1,36 @@
+﻿@page
+@model FamilyHubs.ServiceDirectory.Ui.Pages.ProfessionalReferral.SearchModel
+@{
+}
+
+<h1 class="govuk-heading-l">Find support from local services by name or postcode</h1>
+    <form method="post">
+      <div class="govuk-form-group" id="search-options">
+        <div class="govuk-radios" data-module="govuk-radios">
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" aria-controls="name-conditional" type="radio" value="name" name="SearchOption" id="option1" aria-expanded="false">
+            <label class="govuk-label govuk-radios__label" for="option1">By name of service</label>
+          </div>
+          <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="name-conditional" >
+            <div class="govuk-form-group">
+              <label class="govuk-label" for="ServiceName">Name of service or provider</label>
+              <input class="govuk-input" id="ServiceName" name="ServiceName" type="text" value="@Model.ServiceName">
+            </div>
+          </div>
+          <div class="govuk-radios__divider">or</div>
+          <div class="govuk-radios__item">
+            <input class="govuk-radios__input" aria-controls="location-conditional" type="radio" value="postcode" name="SearchOption" id="option2" aria-expanded="false">
+            <label class="govuk-label govuk-radios__label" for="option2">By postcode</label>
+          </div>
+          <div class="govuk-radios__conditional govuk-radios__conditional--hidden" id="location-conditional">
+            <div class="govuk-form-group ">
+              <label class="govuk-label" for="postcode">Postcode</label>
+              <input class="govuk-input govuk-input--width-10" id="Postcode" name="Postcode" value="@Model.Postcode" type="text" autocomplete="postal-code">
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="govuk-button">
+        Continue
+      </button>
+    </form>
