@@ -12,7 +12,7 @@ public static class ServiceCollectionExtensions
         serviceCollection.AddClient<IApiService>((c, s) => new ApiService(c));
         serviceCollection.AddClient<IPostcodeLocationClientService>((c, s) => new PostcodeLocationClientService(c));
         serviceCollection.AddClient<ILocalOfferClientService>((c, s) => new LocalOfferClientService(c));
-        serviceCollection.AddClient<IOpenReferralOrganisationAdminClientService>((c, s) => new OpenReferralOrganisationAdminClientService(c));
+        serviceCollection.AddClient<IOpenReferralOrganisationClientService>((c, s) => new OpenReferralOrganisationClientService(c));
         serviceCollection.AddClient<IUICacheService>((c, s) => new UICacheService(c));
         return serviceCollection;
     }

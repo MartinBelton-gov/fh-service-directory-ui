@@ -6,7 +6,7 @@ using System.Text.Json;
 
 namespace FamilyHubs.ServiceDirectory.Ui.Services.Api;
 
-public interface IOpenReferralOrganisationAdminClientService
+public interface IOpenReferralOrganisationClientService
 {
     Task<PaginatedList<OpenReferralTaxonomyDto>> GetTaxonomyList(int pageNumber = 1, int pageSize = 10);
     Task<List<OpenReferralOrganisationDto>> GetListOpenReferralOrganisations();
@@ -15,9 +15,9 @@ public interface IOpenReferralOrganisationAdminClientService
     Task<string> UpdateOrganisation(OpenReferralOrganisationWithServicesDto organisation);
 }
 
-public class OpenReferralOrganisationAdminClientService : ApiService, IOpenReferralOrganisationAdminClientService
+public class OpenReferralOrganisationClientService : ApiService, IOpenReferralOrganisationClientService
 {
-    public OpenReferralOrganisationAdminClientService(HttpClient client)
+    public OpenReferralOrganisationClientService(HttpClient client)
     : base(client)
     {
 

@@ -23,11 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\FamilyHubs.ServiceDirectoryAdminUi.Ui\FamilyHubs.ServiceDirectory.Ui.csproj" />
+    <Folder Include="Pages\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\" />
+    <ProjectReference Include="..\src\FamilyHubs.ServiceDirectory.UI\FamilyHubs.ServiceDirectory.Ui.csproj" />
   </ItemGroup>
 
 </Project>
