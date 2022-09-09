@@ -2,9 +2,9 @@
 
 public class ExternalLinksConfiguration
 {
-    public const string EmployerIncentivesExternalLinksConfiguration = "ExternalLinks";
+    public const string FamilyHubsExternalLinksConfiguration = "ExternalLinks";
 
-    public virtual string ManageApprenticeshipSiteUrl { get; set; } = default!;
+    public virtual string ManageFamilyHubsSiteUrl { get; set; } = default!;
     public virtual string CommitmentsSiteUrl { get; set; } = default!;
-    public virtual string EmployerRecruitmentSiteUrl { get; set; } = default!;
+    
 }

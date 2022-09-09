@@ -50,7 +50,7 @@ public static class HtmlHelperExtensions
 #pragma warning disable CS8601 // Possible null reference assignment.
         return new FooterViewModel(new FooterConfiguration
         {
-            ManageApprenticeshipsBaseUrl = externalLinks?.ManageApprenticeshipSiteUrl
+            FamilyHubsBaseUrl = externalLinks?.ManageFamilyHubsSiteUrl
         },
             new UserContext
             {
@@ -69,7 +69,7 @@ public static class HtmlHelperExtensions
 #pragma warning disable CS8601 // Possible null reference assignment.
         return new CookieBannerViewModel(new CookieBannerConfiguration
         {
-            ManageFamilyHubBaseUrl = externalLinks?.ManageApprenticeshipSiteUrl
+            ManageFamilyHubBaseUrl = externalLinks?.ManageFamilyHubsSiteUrl
         },
             new UserContext
             {

@@ -7,7 +7,7 @@ namespace FamilyHubs.ServiceDirectory.Ui.Models;
 public class FooterViewModel : IFooterViewModel
 {
     const string BuiltByHRef = "http://gov.uk/esfa";
-    const string SurveyHRef = "https://www.smartsurvey.co.uk/s/apprenticeshipservicefeedback/";
+    const string SurveyHRef = "https://www.smartsurvey.co.uk/";
     const string OpenGovernmentLicenseHRef = "https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/";
     const string CrownCopyrightHRef = "https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/";
 
@@ -37,18 +37,18 @@ public class FooterViewModel : IFooterViewModel
         _urlHelper = urlHelper ?? new UrlHelper();
         UseLegacyStyles = useLegacyStyles;
 
-        AddOrUpdateLink(new Help(_urlHelper.GetPath(configuration.ManageApprenticeshipsBaseUrl, "service/help"), GetLinkClass()));
+        AddOrUpdateLink(new Help(_urlHelper.GetPath(configuration.FamilyHubsBaseUrl, "service/help"), GetLinkClass()));
         AddOrUpdateLink(new Feedback(SurveyHRef, GetLinkClass()));
-        AddOrUpdateLink(new Privacy(_urlHelper.GetPath(userContext, configuration.ManageApprenticeshipsBaseUrl, "privacy", "service"), GetLinkClass()));
+        AddOrUpdateLink(new Privacy(_urlHelper.GetPath(userContext, configuration.FamilyHubsBaseUrl, "privacy", "service"), GetLinkClass()));
         if (userContext?.HashedAccountId == null)
         {
-            AddOrUpdateLink(new Cookies(_urlHelper.GetPath(configuration.ManageApprenticeshipsBaseUrl, "cookieConsent"), GetLinkClass()));
+            AddOrUpdateLink(new Cookies(_urlHelper.GetPath(configuration.FamilyHubsBaseUrl, "cookieConsent"), GetLinkClass()));
         }
         else
         {
-            AddOrUpdateLink(new Cookies(_urlHelper.GetPath(userContext, configuration.ManageApprenticeshipsBaseUrl, "cookieConsent"), GetLinkClass()));
+            AddOrUpdateLink(new Cookies(_urlHelper.GetPath(userContext, configuration.FamilyHubsBaseUrl, "cookieConsent"), GetLinkClass()));
         }
-        AddOrUpdateLink(new TermsAndConditions(_urlHelper.GetPath(configuration.ManageApprenticeshipsBaseUrl, "service/termsAndConditions/overview"), GetLinkClass()));
+        AddOrUpdateLink(new TermsAndConditions(_urlHelper.GetPath(configuration.FamilyHubsBaseUrl, "service/termsAndConditions/overview"), GetLinkClass()));
         AddOrUpdateLink(new BuiltBy(BuiltByHRef, GetLinkClass()));
         AddOrUpdateLink(new OpenGovernmentLicense(OpenGovernmentLicenseHRef, GetLinkClass()));
         AddOrUpdateLink(new OpenGovernmentLicenseV3(OpenGovernmentLicenseHRef, GetLinkClass()));
