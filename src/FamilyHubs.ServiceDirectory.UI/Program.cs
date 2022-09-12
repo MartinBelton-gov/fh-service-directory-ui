@@ -1,4 +1,6 @@
 using FamilyHubs.ServiceDirectory.Ui.Extensions;
+using FamilyHubs.ServiceDirectory.Ui.Models;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,20 @@ builder.Services
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+if (builder.Configuration.GetValue<bool>("UseRabbitMQ"))
+{
+    var rabbitMqSettings = builder.Configuration.GetSection(nameof(RabbitMqSettings)).Get<RabbitMqSettings>();
+    builder.Services.AddMassTransit(mt =>
+                        mt.UsingRabbitMq((cntxt, cfg) =>
+                        {
+                            cfg.Host(rabbitMqSettings.Uri, "/", c =>
+                            {
+                                c.Username(rabbitMqSettings.UserName);
+                                c.Password(rabbitMqSettings.Password);
+                            });
+                        }));
+}
 
 var app = builder.Build();
 

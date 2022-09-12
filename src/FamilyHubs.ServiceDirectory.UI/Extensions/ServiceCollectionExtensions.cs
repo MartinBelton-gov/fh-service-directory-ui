@@ -14,6 +14,7 @@ public static class ServiceCollectionExtensions
         serviceCollection.AddClient<ILocalOfferClientService>((c, s) => new LocalOfferClientService(c));
         serviceCollection.AddClient<IOpenReferralOrganisationClientService>((c, s) => new OpenReferralOrganisationClientService(c));
         serviceCollection.AddClient<IUICacheService>((c, s) => new UICacheService(c));
+        serviceCollection.AddClient<IReferralClientService>((c, s) => new ReferralClientService(c));
         return serviceCollection;
     }
 
