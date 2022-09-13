@@ -45,7 +45,13 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
+Program.ServiceProvider = app.Services;
+
 app.Run();
 
-public partial class Program { }
+public partial class Program
+{
+    public static IServiceProvider ServiceProvider { get; set; } = default!;
+}
+
 

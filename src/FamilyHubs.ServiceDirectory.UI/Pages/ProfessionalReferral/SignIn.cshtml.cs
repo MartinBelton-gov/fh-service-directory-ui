@@ -15,7 +15,7 @@ public class SignInModel : PageModel
 
     public IActionResult OnPost()
     {
-        return RedirectToPage("/ProfessionalReferral/Search", new
+        return RedirectToPage("/ProfessionalReferral/ProfessionalHomepage", new
         {
         });
     }

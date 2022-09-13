@@ -14,7 +14,7 @@ public static class ServiceCollectionExtensions
         serviceCollection.AddClient<ILocalOfferClientService>((c, s) => new LocalOfferClientService(c));
         serviceCollection.AddClient<IOpenReferralOrganisationClientService>((c, s) => new OpenReferralOrganisationClientService(c));
         serviceCollection.AddClient<IUICacheService>((c, s) => new UICacheService(c));
-        serviceCollection.AddClient<IReferralClientService>((c, s) => new ReferralClientService(c));
+        serviceCollection.AddClient<IReferralClientService>((c, s) => new ReferralClientService(c, s.GetRequiredService<IOptions<ApiOptions>>()));
         return serviceCollection;
     }
 
@@ -31,16 +31,20 @@ public static class ServiceCollectionExtensions
 
             var clientBuilder = new HttpClientBuilder()
                 .WithDefaultHeaders()
-                .WithApimAuthorisationHeader(settings)
+                //.WithApimAuthorisationHeader(settings)
                 .WithLogging(s.GetService<ILoggerFactory>());
 
             var httpClient = clientBuilder.Build();
 
-            if (!settings.ApiBaseUrl.EndsWith("/"))
+            if (!settings.ServiceDirectoryUrl.EndsWith("/"))
             {
-                settings.ApiBaseUrl += "/";
+                settings.ServiceDirectoryUrl += "/";
             }
-            httpClient.BaseAddress = new Uri(settings.ApiBaseUrl);
+            if (!settings.ReferralApiUrl.EndsWith("/"))
+            {
+                settings.ReferralApiUrl += "/";
+            }
+            httpClient.BaseAddress = new Uri(settings.ServiceDirectoryUrl);
 
             return instance.Invoke(httpClient, s);
         });
