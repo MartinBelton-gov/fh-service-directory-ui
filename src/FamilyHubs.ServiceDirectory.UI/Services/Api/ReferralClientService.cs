@@ -1,5 +1,7 @@
-﻿using FamilyHubs.ServiceDirectoryCaseManagement.Common.Dto;
+﻿using FamilyHubs.ServiceDirectory.Ui.Infrastructure.Configuration;
+using FamilyHubs.ServiceDirectoryCaseManagement.Common.Dto;
 using FamilyHubs.SharedKernel;
+using Microsoft.Extensions.Options;
 using System.Text;
 using System.Text.Json;
 
@@ -13,10 +15,11 @@ public interface IReferralClientService
 
 public class ReferralClientService : ApiService, IReferralClientService
 {
-    public ReferralClientService(HttpClient client)
+    public ReferralClientService(HttpClient client, IOptions<ApiOptions> options)
         : base(client)
     {
-        client.BaseAddress = new Uri("http://localhost:7282");
+        ApiOptions settings = options.Value;
+        client.BaseAddress = new Uri(settings.ReferralApiUrl);
     }
 
     public async Task<PaginatedList<ReferralDto>> GetReferralsByReferrer(string referrer, int pageNumber, int pageSize)

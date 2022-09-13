@@ -33,13 +33,11 @@ public class CheckReferralDetailsModel : PageModel
     private readonly IConfiguration _configuration;
     private readonly ILocalOfferClientService _localOfferClientService;
     private readonly IReferralClientService _referralClientService;
-    private readonly IPublishEndpoint _publishEndPoint;
-    public CheckReferralDetailsModel(IConfiguration configuration, ILocalOfferClientService localOfferClientService, IReferralClientService referralClientService, IPublishEndpoint publishEndPoint)
+    public CheckReferralDetailsModel(IConfiguration configuration, ILocalOfferClientService localOfferClientService, IReferralClientService referralClientService)
     {
         _referralClientService = referralClientService;
         _configuration = configuration;
         _localOfferClientService = localOfferClientService;
-        _publishEndPoint = publishEndPoint;
     }
 
     public void OnGet(string id, string name, string fullName, string hasSpecialNeeds, string email, string phone, string reasonForSupport)
@@ -64,7 +62,15 @@ public class CheckReferralDetailsModel : PageModel
         {
             if (_configuration.GetValue<bool>("UseRabbitMQ"))
             {
-                await _publishEndPoint.Publish(new CommandMessage(Guid.NewGuid().ToString(), Newtonsoft.Json.JsonConvert.SerializeObject(dto)));
+                using (var scope = Program.ServiceProvider.CreateScope())
+                {
+#pragma warning disable CS8600 // Converting null literal or possible null value to non-nullable type.
+                    IPublishEndpoint publishEndPoint = scope.ServiceProvider.GetService<IPublishEndpoint>();
+#pragma warning restore CS8600 // Converting null literal or possible null value to non-nullable type.
+                    if (publishEndPoint != null)
+                        await publishEndPoint.Publish(new CommandMessage(Guid.NewGuid().ToString(), Newtonsoft.Json.JsonConvert.SerializeObject(dto)));
+                }
+
             }
             else
             {
