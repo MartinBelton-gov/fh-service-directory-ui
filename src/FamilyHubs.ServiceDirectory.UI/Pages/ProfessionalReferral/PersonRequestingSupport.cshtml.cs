@@ -21,6 +21,13 @@ public class PersonRequestingSupportModel : PageModel
 
             });
         }
+        else if (string.Compare(IsTypeOfPerson, "vcsadmin", StringComparison.OrdinalIgnoreCase) == 0)
+        {
+            return RedirectToPage("/Vcs/SignIn", new
+            {
+
+            });
+        }
 
         return RedirectToPage("/ProfessionalReferral/Search", new
         {

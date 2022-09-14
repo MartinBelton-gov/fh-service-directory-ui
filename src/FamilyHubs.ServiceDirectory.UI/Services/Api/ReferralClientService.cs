@@ -11,6 +11,8 @@ public interface IReferralClientService
 {
     Task<PaginatedList<ReferralDto>> GetReferralsByReferrer(string referrer, int pageNumber, int pageSize);
     Task<string> CreateReferral(ReferralDto referralDto);
+    Task<PaginatedList<ReferralDto>> GetReferralsByOrganisationId(string id, int pageNumber, int pageSize);
+    Task<ReferralDto?> GetReferralById(string id);
 }
 
 public class ReferralClientService : ApiService, IReferralClientService
@@ -35,6 +37,36 @@ public class ReferralClientService : ApiService, IReferralClientService
         response.EnsureSuccessStatusCode();
 
         return await JsonSerializer.DeserializeAsync<PaginatedList<ReferralDto>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new PaginatedList<ReferralDto>();
+    }
+
+    public async Task<PaginatedList<ReferralDto>> GetReferralsByOrganisationId(string id, int pageNumber, int pageSize)
+    {
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(_client.BaseAddress + $"api/organisationreferrals/{id}?pageNumber={pageNumber}&pageSize={pageSize}"),
+        };
+
+        using var response = await _client.SendAsync(request);
+
+        response.EnsureSuccessStatusCode();
+
+        return await JsonSerializer.DeserializeAsync<PaginatedList<ReferralDto>>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new PaginatedList<ReferralDto>();
+    }
+
+    public async Task<ReferralDto?> GetReferralById(string id)
+    {
+        var request = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(_client.BaseAddress + $"api/referral/{id}"),
+        };
+
+        using var response = await _client.SendAsync(request);
+
+        response.EnsureSuccessStatusCode();
+
+        return await JsonSerializer.DeserializeAsync<ReferralDto>(await response.Content.ReadAsStreamAsync(), options: new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
     }
 
     public async Task<string> CreateReferral(ReferralDto referralDto)
