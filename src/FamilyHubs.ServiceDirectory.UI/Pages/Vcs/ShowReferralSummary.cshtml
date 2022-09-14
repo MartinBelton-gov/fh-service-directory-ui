@@ -1,5 +1,5 @@
 ﻿@page
-@model FamilyHubs.ServiceDirectory.Ui.Pages.ProfessionalReferral.ReferralDashboardModel
+@model FamilyHubs.ServiceDirectory.Ui.Pages.Vcs.ShowReferralSummaryModel
 @{
 }
 
@@ -25,10 +25,11 @@
                 <td class="govuk-table__cell">@item.Email</td>
                 <td class="govuk-table__cell">@item.ServiceName</td>
                 <td class="govuk-table__cell">@item.Status?.LastOrDefault()?.Status</td>
-                <td class="govuk-table__cell"><a asp-page="/ProfessionalReferral/ReferralDashboardDetails" asp-route-id="@item.Id">View Details</a></td>
+                <td class="govuk-table__cell"><a asp-page="/Vcs/ShowReferralDetails" asp-route-id="@item.Id">View Details</a></td>
             }
           
         </tr>
       </tbody>
     </table>
 </main>
+
